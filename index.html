@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clima Api</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/weather-icons/2.0.10/css/weather-icons.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <link rel="icon" type="image/vnd.icon" href="img/nublado.ico">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <div class="logo">
+                <i class="fas fa-cloud-sun"></i>
+                <span>Clima</span>
+            </div>
+            <div class="header-actions">
+                <button id="unitToggle" class="action-button">
+                    <span id="unitText">°C</span>
+                </button>
+                <button id="darkModeToggle" class="action-button icon-only">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </div>
+        <div class="search-container">
+            <input type="text" id="cityInput" class="search-input" placeholder="Buscar ciudad..." autocomplete="off">
+            <button id="searchButton" class="search-button">
+                <i class="fas fa-search"></i>
+            </button>
+            <div id="searchHistory" class="search-history"> 
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="weather-container">
+            <div class="card current-weather fade-in">
+                <div class="location">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <h2 id="location">Cargando ubicación...</h2>
+                </div>
+                <div class="current-date" id="currentDate"></div>
+                
+                <div class="weather-main">
+                    <div class="temperature">
+                        <span id="currentTemp">--</span>
+                        <span class="temp-unit">°C</span>
+                    </div>
+                    <div class="weather-icon">
+                        <div id="weatherIcon"></div>
+                        <div id="weatherDescription" class="weather-description"></div>
+                    </div>
+                </div>
+                
+                <div class="weather-details">
+                    <div class="weather-detail">
+                        <i class="fas fa-temperature-low detail-icon"></i>
+                        <span class="detail-label">Mínima</span>
+                        <span id="minTemp" class="detail-value">--°</span>
+                    </div>
+                    <div class="weather-detail">
+                        <i class="fas fa-temperature-high detail-icon"></i>
+                        <span class="detail-label">Máxima</span>
+                        <span id="maxTemp" class="detail-value">--°</span>
+                    </div>
+                    <div class="weather-detail">
+                        <i class="fas fa-tint detail-icon"></i>
+                        <span class="detail-label">Humedad</span>
+                        <span id="humidity" class="detail-value">--%</span>
+                    </div>
+                    <div class="weather-detail">
+                        <i class="fas fa-wind detail-icon"></i>
+                        <span class="detail-label">Viento</span>
+                        <span id="windSpeed" class="detail-value">-- km/h</span>
+                    </div>
+                </div>
+                
+                <div class="sun-times">
+                    <div class="sun-time">
+                        <i class="fas fa-sun sun-icon"></i>
+                        <span class="sun-label">Amanecer</span>
+                        <span id="sunrise" class="sun-value">--:--</span>
+                    </div>
+                    <div class="sun-time">
+                        <i class="fas fa-moon sun-icon sunset-icon"></i>
+                        <span class="sun-label">Atardecer</span>
+                        <span id="sunset" class="sun-value">--:--</span>
+                    </div>
+                </div>
+                
+                <div class="air-quality">
+                    <div class="aqi-label">
+                        <i class="fas fa-lungs detail-icon"></i>
+                        <span>Calidad del Aire</span>
+                    </div>
+                    <div class="aqi-value">
+                        <span id="aqiValue" class="aqi-indicator aqi-good">Buena</span>
+                    </div>
+                </div>
+                
+                <div class="uv-index">
+                    <div class="uv-header">
+                        <i class="fas fa-sun detail-icon"></i>
+                        <span>Índice UV</span>
+                    </div>
+                    <div class="uv-meter">
+                        <div id="uvIndicator" class="uv-indicator" style="left: 20%;"></div>
+                    </div>
+                    <div class="uv-labels">
+                        <span>Bajo</span>
+                        <span>Moderado</span>
+                        <span>Alto</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card weather-chart">
+                <div class="chart-title">
+                    <i class="fas fa-chart-line"></i>
+                    <span>Previsión de Temperatura</span>
+                </div>
+                <div class="chart-container">
+                    <canvas id="tempChart"></canvas>
+                </div>
+            </div>
+        </div>
+        
+        <h3 class="forecast-heading">
+            <i class="fas fa-calendar-alt"></i>
+            <span>Pronóstico para los próximos días</span>
+        </h3>
+        
+        <div id="forecast" class="forecast">
+            <!-- Forecast cards will be added here -->
+        </div>
+    </main>
+    
+    <div id="loading" class="loading">
+        <div class="loading-spinner"></div>
+        <p class="loading-text">Cargando datos del clima...</p>
+    </div>
+    
+    <div id="error" class="error hidden"></div>
+    
+    <script src="js/clima.js"></script>
+</body>
+</html>
