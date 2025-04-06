@@ -75,5 +75,5 @@ Accede rápidamente a tus búsquedas recientes
 
 1. **Clona el repositorio**
    ```bash
-   git clone https://github.com/isrradex36/clima-api.git
+   git clone https://github.com/IsrraDex36/clima-api.git
    cd clima-api
